@@ -123,7 +123,30 @@ describe("PropertyService", () => {
 
       await expect(
         PropertyService.getByFilters({ name: "Test" }),
-      ).rejects.toThrow("Network error");
+      ).rejects.toThrow("Error inesperado al obtener propiedades");
+    });
+
+    it("should handle network errors", async () => {
+      const fetchError = new TypeError("fetch failed");
+      vi.mocked(fetch).mockRejectedValueOnce(fetchError);
+
+      await expect(
+        PropertyService.getByFilters({ name: "Test" }),
+      ).rejects.toThrow(
+        "No se pudo conectar con el servidor. Verifica tu conexión.",
+      );
+    });
+
+    it("should handle API errors with status code", async () => {
+      vi.mocked(fetch).mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+        statusText: "Internal Server Error",
+      } as Response);
+
+      await expect(
+        PropertyService.getByFilters({ name: "Test" }),
+      ).rejects.toThrow("Error al obtener propiedades");
     });
   });
 });

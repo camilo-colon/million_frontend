@@ -179,13 +179,51 @@ npm run test:coverage # Reporte de cobertura
 5. **Server Components**: Mockear servicios y renderizar el componente resuelto
 6. **Cobertura**: Excluir archivos de config, tipos y `.next/`
 
+## 🛡️ Manejo de Errores
+
+### Sistema Implementado
+
+El proyecto usa el sistema nativo de Next.js más tipos de error personalizados:
+
+#### Archivos Principales
+
+- **`src/lib/errors.ts`**: Tipos de error personalizados (ApiError, NetworkError, NotFoundError, ValidationError)
+- **`src/app/error.tsx`**: Página de error global de Next.js
+- **`src/app/not-found.tsx`**: Página 404 personalizada
+- **`src/components/ErrorMessage.tsx`**: Componente reutilizable para errores
+
+#### PropertyService Error Handling
+
+El servicio maneja automáticamente:
+- TypeError (fetch failed) → NetworkError
+- HTTP !ok → ApiError con status code
+- Otros errores → ApiError genérico
+
+#### Empty States
+
+El componente `Properties` muestra mensajes amigables cuando no hay resultados.
+
+### Uso en Nuevos Componentes
+
+```typescript
+import { ApiError, NetworkError } from "@/lib/errors";
+import { formatErrorMessage } from "@/lib/errors";
+
+// En servicios
+if (!response.ok) {
+  throw new ApiError("Mensaje", response.status, "/endpoint");
+}
+
+// En componentes
+<ErrorMessage error={error} onRetry={handleRetry} />
+```
+
 ## 🔍 Áreas de Mejora Conocidas
 
 1. **Página de detalle**: `src/app/[id]/page.tsx` está pendiente de implementación
 2. **Variables de entorno**: No hay archivo `.env.example` configurado
-3. **Manejo de errores**: Falta implementar error boundaries y manejo de errores de API
-4. **Caché**: Se podría optimizar el caché de datos con Next.js
-5. **Tests E2E**: Solo hay tests unitarios, faltan tests de integración y E2E
+3. **Caché**: Se podría optimizar el caché de datos con Next.js
+4. **Tests E2E**: Solo hay tests unitarios, faltan tests de integración y E2E
 
 ## 🎯 Guías para Claude
 

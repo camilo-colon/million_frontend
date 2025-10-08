@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Properties from "./Properties";
-import { PropertyService } from "../services/property.service";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Property } from "../models/property.model";
+import { PropertyService } from "../services/property.service";
+import Properties from "./Properties";
 
 // Mock PropertyService
 vi.mock("../services/property.service", () => ({
@@ -13,9 +13,13 @@ vi.mock("../services/property.service", () => ({
 
 // Mock Next.js Link
 vi.mock("next/link", () => ({
-  default: ({ children, href }: { children: React.ReactNode; href: string }) => (
-    <a href={href}>{children}</a>
-  ),
+  default: ({
+    children,
+    href,
+  }: {
+    children: React.ReactNode;
+    href: string;
+  }) => <a href={href}>{children}</a>,
 }));
 
 describe("Properties", () => {
@@ -81,14 +85,20 @@ describe("Properties", () => {
     expect(links[1]).toHaveAttribute("href", "/2");
   });
 
-  it("should render empty grid when no properties", async () => {
+  it("should show empty state message when no properties", async () => {
     vi.mocked(PropertyService.getByFilters).mockResolvedValue([]);
 
     const Component = await Properties({ params: {} });
-    const { container } = render(Component);
+    render(Component);
 
-    const grid = container.querySelector("div");
-    expect(grid?.children.length).toBe(0);
+    expect(
+      screen.getByText(
+        "No se encontraron propiedades con los filtros seleccionados.",
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Intenta ajustar tus criterios de búsqueda."),
+    ).toBeInTheDocument();
   });
 
   it("should pass all filter params to service", async () => {

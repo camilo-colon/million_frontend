@@ -166,6 +166,34 @@ Consulta la [documentación de despliegue de Next.js](https://nextjs.org/docs/ap
 
 El proyecto usa **Biome** para linting y formateo. La configuración se encuentra en `biome.json`.
 
+## 🛡️ Manejo de Errores
+
+El proyecto implementa una gestión de errores robusta:
+
+### Tipos de Error Personalizados
+
+- **ApiError**: Errores de la API con código de estado
+- **NetworkError**: Errores de conexión de red
+- **NotFoundError**: Recursos no encontrados
+- **ValidationError**: Errores de validación de datos
+
+### Páginas de Error de Next.js
+
+- **`error.tsx`**: Captura errores en runtime con opción de reintentar
+- **`not-found.tsx`**: Página 404 personalizada
+
+### Componentes de Error
+
+- **ErrorMessage**: Componente reutilizable para mostrar mensajes de error
+- **Empty State**: Mensaje amigable cuando no hay resultados
+
+### Manejo en el Servicio API
+
+El `PropertyService` maneja automáticamente:
+- Errores de red (sin conexión)
+- Errores HTTP (4xx, 5xx)
+- Errores inesperados con mensajes descriptivos
+
 ## 🧪 Testing
 
 El proyecto utiliza **Vitest** y **React Testing Library** para tests unitarios.
