@@ -155,6 +155,7 @@ src/
 ├── app/(index)/
 │   ├── components/
 │   │   ├── PropertyCard.test.tsx      # Tests de componentes
+│   │   ├── Properties.test.tsx        # Tests de Server Components
 │   │   └── Filters.test.tsx           # Tests de filtros
 │   └── services/
 │       └── property.service.test.ts   # Tests de servicios API
@@ -173,9 +174,10 @@ npm run test:coverage # Reporte de cobertura
 
 1. **Ubicación**: Tests junto al archivo que prueban (`.test.ts` o `.test.tsx`)
 2. **Estructura**: Usar `describe` para agrupar, `it` para casos individuales
-3. **Mocking**: Mockear fetch y hooks de Next.js (`useRouter`, `useSearchParams`)
+3. **Mocking**: Mockear fetch, hooks de Next.js (`useRouter`, `useSearchParams`), y servicios
 4. **Componentes**: Usar `render` de Testing Library y queries semánticas
-5. **Cobertura**: Excluir archivos de config, tipos y `.next/`
+5. **Server Components**: Mockear servicios y renderizar el componente resuelto
+6. **Cobertura**: Excluir archivos de config, tipos y `.next/`
 
 ## 🔍 Áreas de Mejora Conocidas
 

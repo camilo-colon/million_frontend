@@ -192,6 +192,8 @@ Los tests se ubican junto a los archivos que prueban con la extensión `.test.ts
 
 - `src/utils/priceFormater.test.ts` - Tests de utilidades
 - `src/app/(index)/components/PropertyCard.test.tsx` - Tests de componentes
+- `src/app/(index)/components/Properties.test.tsx` - Tests de Server Components
+- `src/app/(index)/components/Filters.test.tsx` - Tests de filtros
 - `src/app/(index)/services/property.service.test.ts` - Tests de servicios
 
 ### Convenciones
