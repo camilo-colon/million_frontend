@@ -20,6 +20,7 @@ Aplicación web para la búsqueda y visualización de propiedades inmobiliarias 
 - **Iconos**: Lucide React 0.545.0
 - **Utilidades**: clsx, tailwind-merge, class-variance-authority
 - **Linter/Formatter**: Biome 2.2.0
+- **Testing**: Vitest 3.2.4, React Testing Library 16.3.0
 
 ## 📋 Requisitos Previos
 
@@ -119,6 +120,10 @@ Los filtros se gestionan mediante URL search params, permitiendo compartir enlac
 - `npm run start` - Inicia el servidor de producción
 - `npm run lint` - Ejecuta el linter con Biome
 - `npm run format` - Formatea el código con Biome
+- `npm test` - Ejecuta los tests unitarios
+- `npm run test:watch` - Ejecuta los tests en modo watch
+- `npm run test:ui` - Abre la interfaz de Vitest
+- `npm run test:coverage` - Genera reporte de cobertura
 
 ## 🔌 API
 
@@ -160,6 +165,42 @@ Consulta la [documentación de despliegue de Next.js](https://nextjs.org/docs/ap
 ## 📝 Configuración de Código
 
 El proyecto usa **Biome** para linting y formateo. La configuración se encuentra en `biome.json`.
+
+## 🧪 Testing
+
+El proyecto utiliza **Vitest** y **React Testing Library** para tests unitarios.
+
+### Ejecutar Tests
+
+```bash
+# Ejecutar todos los tests
+npm test
+
+# Ejecutar tests en modo watch
+npm run test:watch
+
+# Ver UI interactiva de tests
+npm run test:ui
+
+# Generar reporte de cobertura
+npm run test:coverage
+```
+
+### Estructura de Tests
+
+Los tests se ubican junto a los archivos que prueban con la extensión `.test.ts` o `.test.tsx`:
+
+- `src/utils/priceFormater.test.ts` - Tests de utilidades
+- `src/app/(index)/components/PropertyCard.test.tsx` - Tests de componentes
+- `src/app/(index)/services/property.service.test.ts` - Tests de servicios
+
+### Convenciones
+
+- Usar `describe` para agrupar tests relacionados
+- Nombrar tests de forma descriptiva con `it("should...")`
+- Mockear dependencias externas (fetch, Next.js hooks)
+- Usar `@testing-library/react` para tests de componentes
+- Verificar tanto casos exitosos como casos de error
 
 ## 🤝 Contribución
 

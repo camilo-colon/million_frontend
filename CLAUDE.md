@@ -137,13 +137,53 @@ npm run lint     # Verificar código con Biome
 npm run format   # Formatear código con Biome
 ```
 
+## 🧪 Testing
+
+### Configuración
+
+- **Framework**: Vitest 3.2.4
+- **Testing Library**: React Testing Library 16.3.0
+- **Entorno**: jsdom
+- **Configuración**: `vitest.config.ts` y `vitest.setup.ts`
+
+### Archivos de Test
+
+```
+src/
+├── utils/
+│   └── priceFormater.test.ts          # Tests de utilidades
+├── app/(index)/
+│   ├── components/
+│   │   ├── PropertyCard.test.tsx      # Tests de componentes
+│   │   └── Filters.test.tsx           # Tests de filtros
+│   └── services/
+│       └── property.service.test.ts   # Tests de servicios API
+```
+
+### Scripts de Testing
+
+```bash
+npm test              # Ejecutar tests
+npm run test:watch    # Modo watch
+npm run test:ui       # UI interactiva
+npm run test:coverage # Reporte de cobertura
+```
+
+### Convenciones de Testing
+
+1. **Ubicación**: Tests junto al archivo que prueban (`.test.ts` o `.test.tsx`)
+2. **Estructura**: Usar `describe` para agrupar, `it` para casos individuales
+3. **Mocking**: Mockear fetch y hooks de Next.js (`useRouter`, `useSearchParams`)
+4. **Componentes**: Usar `render` de Testing Library y queries semánticas
+5. **Cobertura**: Excluir archivos de config, tipos y `.next/`
+
 ## 🔍 Áreas de Mejora Conocidas
 
 1. **Página de detalle**: `src/app/[id]/page.tsx` está pendiente de implementación
 2. **Variables de entorno**: No hay archivo `.env.example` configurado
 3. **Manejo de errores**: Falta implementar error boundaries y manejo de errores de API
-4. **Testing**: No hay tests configurados
-5. **Caché**: Se podría optimizar el caché de datos con Next.js
+4. **Caché**: Se podría optimizar el caché de datos con Next.js
+5. **Tests E2E**: Solo hay tests unitarios, faltan tests de integración y E2E
 
 ## 🎯 Guías para Claude
 
@@ -153,7 +193,8 @@ npm run format   # Formatear código con Biome
 2. **Server vs Client**: ¿Necesita interactividad o puede ser Server Component?
 3. **Tipado**: Siempre usar TypeScript, agregar tipos en `models/` si es necesario
 4. **Responsive**: Asegurar que funcione en mobile y desktop
-5. **Formatear**: Ejecutar `npm run format` después de cambios
+5. **Tests**: Escribir tests unitarios para nuevas funciones/componentes
+6. **Formatear**: Ejecutar `npm run format` después de cambios
 
 ### Al Hacer Refactoring
 
