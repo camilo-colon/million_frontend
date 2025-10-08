@@ -5,3 +5,10 @@ export interface Property {
   price: number;
   image: string;
 }
+
+export interface PropertyQuery {
+  name?: string;
+  address?: string;
+  minPrice?: number;
+  maxPrice?: number;
+}

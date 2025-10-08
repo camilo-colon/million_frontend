@@ -15,9 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} antialiased`}>
+      <body
+        className={`${montserrat.variable} antialiased  px-4 lg:px-8 mx-auto`}
+      >
         <Header />
-        <main className="w-11/12 mx-auto"> {children}</main>
+        <main> {children}</main>
       </body>
     </html>
   );

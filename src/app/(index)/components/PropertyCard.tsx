@@ -1,6 +1,6 @@
-import { cairo, cinzel } from "@/ui/fonts";
-import { Property } from "../models/property.model";
 import Image from "next/image";
+import { cairo, cinzel } from "@/ui/fonts";
+import type { Property } from "../models/property.model";
 
 export default function PropertyCard({ property }: { property: Property }) {
   return (

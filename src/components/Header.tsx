@@ -1,13 +1,13 @@
-import Link from "next/link";
 import Image from "next/image";
-import logo from "../../public/logo.svg";
+import Link from "next/link";
 import { cairo } from "@/ui/fonts";
+import logo from "../../public/logo.svg";
 
 export const Header = () => {
   return (
-    <header className="flex items-center justify-between py-4 px-4 lg:px-8 mx-auto">
-      <Link href="/" className="logo">
-        <Image src={logo} alt="Logo" width={120} priority={true} />
+    <header className="flex items-center justify-between py-4">
+      <Link href="/" className="logo" as="/">
+        <Image src={logo} alt="Logo" width={120} priority />
       </Link>
       <div className="flex items-center gap-4 text-xs lg:text-lg uppercase">
         <nav className="hidden lg:block">
@@ -26,7 +26,10 @@ export const Header = () => {
             </li>
           </ul>
         </nav>
-        <button className="border rounded-lg py-1 px-4 cursor-pointer">
+        <button
+          type="button"
+          className="border rounded-lg py-1 px-4 cursor-pointer"
+        >
           SELL YOUR UNIT
         </button>
       </div>

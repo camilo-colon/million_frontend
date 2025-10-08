@@ -1,9 +1,11 @@
+import { randomUUID } from "node:crypto";
+
 export default function PropertiesSkeleton() {
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(600px,1fr))] gap-4">
-      {Array.from({ length: 4 }, (_, index) => (
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-4">
+      {Array.from({ length: 4 }, () => (
         <div
-          key={index}
+          key={randomUUID()}
           className="bg-white shadow-md rounded-lg overflow-hidden"
         >
           <div className="relative w-full h-[400px]">
