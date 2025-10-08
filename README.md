@@ -1,36 +1,178 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Million Frontend
 
-## Getting Started
+Aplicación web para la búsqueda y visualización de propiedades inmobiliarias de lujo, construida con Next.js 15 y React 19.
 
-First, run the development server:
+## 🚀 Características
 
+- **Búsqueda avanzada**: Filtrado de propiedades por nombre, dirección y rango de precios
+- **Interfaz responsiva**: Diseño optimizado para dispositivos móviles y desktop
+- **Renderizado del lado del servidor**: Optimización de rendimiento con Next.js App Router
+- **Suspense**: Carga asíncrona de componentes con skeleton loaders
+- **Turbopack**: Compilación ultrarrápida en desarrollo
+
+## 🛠️ Stack Tecnológico
+
+- **Framework**: Next.js 15.5.4
+- **Biblioteca UI**: React 19.1.0
+- **Lenguaje**: TypeScript 5.9.3
+- **Estilos**: Tailwind CSS 4.1.14
+- **Formularios**: Formik 2.4.6
+- **Iconos**: Lucide React 0.545.0
+- **Utilidades**: clsx, tailwind-merge, class-variance-authority
+- **Linter/Formatter**: Biome 2.2.0
+
+## 📋 Requisitos Previos
+
+- Node.js 20.x o superior
+- npm, yarn, pnpm o bun
+- API backend ejecutándose en `http://localhost:5004`
+
+## 🔧 Instalación
+
+1. Clona el repositorio:
+```bash
+git clone <url-del-repositorio>
+cd million_frontend
+```
+
+2. Instala las dependencias:
+```bash
+npm install
+# o
+yarn install
+# o
+pnpm install
+# o
+bun install
+```
+
+3. Ejecuta el servidor de desarrollo:
 ```bash
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
+# o
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Estructura del Proyecto
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+million_frontend/
+├── src/
+│   ├── app/
+│   │   ├── (index)/
+│   │   │   ├── components/
+│   │   │   │   ├── Filters.tsx          # Filtros de búsqueda
+│   │   │   │   ├── Properties.tsx       # Listado de propiedades
+│   │   │   │   ├── PropertyCard.tsx     # Tarjeta individual de propiedad
+│   │   │   │   ├── PropertiesSkeleton.tsx  # Loading state
+│   │   │   │   └── Search.tsx           # Buscador
+│   │   │   ├── models/
+│   │   │   │   └── property.model.ts    # Interfaces TypeScript
+│   │   │   ├── services/
+│   │   │   │   └── property.service.ts  # Llamadas a API
+│   │   │   └── page.tsx                 # Página principal
+│   │   ├── [id]/
+│   │   │   └── page.tsx                 # Página de detalle de propiedad
+│   │   └── layout.tsx                   # Layout principal
+│   ├── components/
+│   │   ├── Header.tsx                   # Encabezado
+│   │   ├── Input.tsx                    # Input reutilizable
+│   │   └── Slider.tsx                   # Slider de precios
+│   ├── ui/
+│   │   └── fonts.ts                     # Configuración de fuentes
+│   ├── utils/
+│   │   └── priceFormater.ts             # Utilidad para formatear precios
+│   └── lib/
+│       └── utils.ts                     # Utilidades generales
+├── public/                              # Recursos estáticos
+└── package.json
+```
 
-## Learn More
+## 🎨 Características Principales
 
-To learn more about Next.js, take a look at the following resources:
+### Filtrado de Propiedades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+La aplicación permite filtrar propiedades mediante:
+- **Rango de precios**: Desde $1M hasta cualquier límite superior
+- **Nombre**: Búsqueda por nombre de propiedad
+- **Dirección**: Búsqueda por ubicación
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Los filtros se gestionan mediante URL search params, permitiendo compartir enlaces con filtros aplicados.
 
-## Deploy on Vercel
+### Componentes Principales
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **`Properties`** (`src/app/(index)/components/Properties.tsx`): Renderiza el grid de propiedades
+- **`Filters`** (`src/app/(index)/components/Filters.tsx`): Gestiona los filtros activos
+- **`Search`** (`src/app/(index)/components/Search.tsx`): Formulario de búsqueda
+- **`PropertyCard`** (`src/app/(index)/components/PropertyCard.tsx`): Tarjeta de propiedad individual
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📜 Scripts Disponibles
+
+- `npm run dev` - Inicia el servidor de desarrollo con Turbopack
+- `npm run build` - Compila la aplicación para producción
+- `npm run start` - Inicia el servidor de producción
+- `npm run lint` - Ejecuta el linter con Biome
+- `npm run format` - Formatea el código con Biome
+
+## 🔌 API
+
+La aplicación se conecta a un backend REST en `http://localhost:5004/api/properties`.
+
+### Endpoint principal:
+```
+POST /api/properties
+Content-Type: application/json
+
+{
+  "minPrice": number,
+  "maxPrice": number,
+  "name": string,
+  "address": string
+}
+```
+
+## 🎯 Modelo de Datos
+
+```typescript
+interface Property {
+  idOwner: string;
+  name: string;
+  address: string;
+  price: number;
+  image: string;
+}
+```
+
+## 🚀 Despliegue
+
+La forma más sencilla de desplegar esta aplicación es usando [Vercel](https://vercel.com):
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=<url-del-repositorio>)
+
+Consulta la [documentación de despliegue de Next.js](https://nextjs.org/docs/app/building-your-application/deploying) para más detalles.
+
+## 📝 Configuración de Código
+
+El proyecto usa **Biome** para linting y formateo. La configuración se encuentra en `biome.json`.
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📄 Licencia
+
+Este proyecto es privado.
+
+## 📞 Soporte
+
+Para soporte, abre un issue en el repositorio.
