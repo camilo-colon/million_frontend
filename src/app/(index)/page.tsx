@@ -12,8 +12,10 @@ export default async function Home({
 }) {
   const params = await searchParams;
   return (
-    <div className="flex gap-4">
-      <Search />
+    <div className="flex flex-col lg:flex-row gap-4">
+      <div>
+        <Search />
+      </div>
       <div className="flex-grow flex flex-col gap-4">
         <Filters />
         <Suspense fallback={<PropertiesSkeleton />}>

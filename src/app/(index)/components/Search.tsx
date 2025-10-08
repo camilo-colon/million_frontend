@@ -47,10 +47,7 @@ export default function Search() {
   }, [searchParams, formik.setValues]);
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="h-full flex flex-col gap-4 w-1/5"
-    >
+    <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4">
       <div className="border-b border-gray-300 flex justify-between items-center py-2">
         <h2 className={`${cinzel.className} text-xl `}>Filters</h2>
         <button type="submit" className="border rounded-lg py-1 px-4">
@@ -60,7 +57,7 @@ export default function Search() {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <h4 className={`${cairo.className} text-xl`}>Price Range</h4>
-          <div className="flex gap-4">
+          <div className="flex w-full gap-4">
             <div>
               <label htmlFor="from">From</label>
               <Input
