@@ -1,27 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
-import { formatErrorMessage } from "@/lib/errors";
-
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: Error;
   reset: () => void;
 }) {
-  useEffect(() => {
-    // Log del error para debugging
-    console.error("Error capturado:", error);
-  }, [error]);
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       <div className="text-center max-w-md">
         <h2 className="text-3xl font-bold text-red-600 mb-4">
           ¡Oops! Algo salió mal
         </h2>
-        <p className="text-gray-600 mb-6">{formatErrorMessage(error)}</p>
+        <p className="text-gray-600 mb-6">{error.message}</p>
         <div className="flex gap-4 justify-center">
           <button
             type="button"
