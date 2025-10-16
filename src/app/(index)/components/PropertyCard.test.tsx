@@ -5,6 +5,7 @@ import type { Property } from "../models/property.model";
 
 describe("PropertyCard", () => {
   const mockProperty: Property = {
+    id: "1",
     idOwner: "1",
     name: "Luxury Villa",
     address: "123 Ocean Drive, Miami, FL",
@@ -43,6 +44,7 @@ describe("PropertyCard", () => {
 
   it("should render with different property data", () => {
     const differentProperty: Property = {
+      id: "1",
       idOwner: "2",
       name: "Modern Penthouse",
       address: "456 Park Avenue, New York, NY",
@@ -53,7 +55,9 @@ describe("PropertyCard", () => {
     render(<PropertyCard property={differentProperty} />);
 
     expect(screen.getByText("Modern Penthouse")).toBeInTheDocument();
-    expect(screen.getByText("456 Park Avenue, New York, NY")).toBeInTheDocument();
+    expect(
+      screen.getByText("456 Park Avenue, New York, NY"),
+    ).toBeInTheDocument();
     expect(screen.getByText("$12,000,000")).toBeInTheDocument();
   });
 });

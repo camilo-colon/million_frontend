@@ -25,18 +25,26 @@ vi.mock("next/link", () => ({
 describe("Properties", () => {
   const mockProperties: Property[] = [
     {
+      id: "1",
       idOwner: "1",
       name: "Luxury Villa",
       address: "Miami, FL",
       price: 5000000,
+      codeInternal: "LV001",
+      year: 2020,
       image: "/villa.jpg",
+      images: [],
     },
     {
+      id: "2",
       idOwner: "2",
       name: "Modern Penthouse",
       address: "New York, NY",
       price: 12000000,
+      codeInternal: "PH001",
+      year: 2022,
       image: "/penthouse.jpg",
+      images: [],
     },
   ];
 
